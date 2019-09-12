@@ -19,7 +19,8 @@ module.exports = {
     },
     authenticate: function(req, res, next) {
         userModel.findOne({email:req.body.email}, function(err, userInfo){
-            if(err) {
+            if(err || userInfo == null) {
+                res.json({status:"error", message: "Invalid email/password!!!", data:null});
                 next(err);
             } else {
                 if (bcrypt.compareSync(req.body.password, userInfo.password)) {
