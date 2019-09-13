@@ -1,6 +1,11 @@
 const userModel = require('../models/users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+var config = require('../../../config/config');
+var standardResponse = require('../../response/standard-res');
+var errorHandler = require('../../helper/error-handler');
+// var jwt = require('jwt-simple');
+var moment = require('moment');
 
 module.exports = {
     create: function(req, res, next) {
@@ -29,6 +34,7 @@ module.exports = {
                 } else {
                     res.json({ status: "error", message: "invalid email/password", data: null});
                 }
+
             }
         });
     }

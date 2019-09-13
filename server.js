@@ -3,15 +3,14 @@ const logger = require('morgan');
 const opportunities = require('./routes/opportunities') ;
 const users = require('./routes/users');
 const mongoose = require('./config/database');
+const config = require('./config/config');
 var jwt = require('jsonwebtoken');
-
 var cors = require('cors');
 const app = express();
 
-
 app.use(cors());
 
-app.set('secretKey', 'nodeRestApi'); // jwt secret token
+app.set('secretKey', config.TOKEN_SECRET); // jwt secret token
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(logger('dev'));
